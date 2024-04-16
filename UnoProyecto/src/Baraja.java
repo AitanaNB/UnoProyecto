@@ -50,4 +50,9 @@ public class Baraja
 	{
 		return this.lista.iterator();
 	}
+
+	public void quitarCarta()
+	{
+		
+	}
 }
