@@ -25,7 +25,7 @@ public class Jugador
 	{
 		if (baraja.contar()==1)
 		{
-			System.out.println("¡¡¡UNO!!!");
+			System.out.println("Â¡Â¡Â¡UNO!!!");
 		}
 	}
 	
@@ -36,7 +36,7 @@ public class Jugador
 	
 	public void agregarCartaAMano(Carta pCarta)
 	{
-		baraja.añadir(pCarta);
+		baraja.anadir(pCarta);
 	}
 	
 	public boolean turnoTerminado()
