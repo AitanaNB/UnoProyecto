@@ -11,6 +11,31 @@ public class Partida
 	{
 		this.jugador1=pJugador1;
 		this.jugador2=pJugador2;
+		this.jugadorActual=pJugador1;
+	}
+	
+	private Partida()
+	{}
+	
+	public void jugarPartida()
+	{
+		
+	}
+	
+	public void repartirCartas(Jugador pJugador)
+	{
+		
+	}
+	
+	private boolean finalizarPartida()
+	{
+		boolean finalizado=true;
+		return finalizado;
+	}
+	
+	public void turnoJugador()
+	{
+		
 	}
 
 
