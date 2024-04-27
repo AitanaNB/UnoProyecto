@@ -21,10 +21,20 @@ public abstract class Carta
 	
 	public boolean puedeUsarse()
 	{
-		//Comprueba que el color de la carta actual coincide con
-		//el de la pila de descarte
+		/*Comprueba que el color de la carta actual coincide con
+		el de la pila de descarte*/
 		boolean sePuede=true;
+		if (this.getColor()==PilaDescarte.getPilaDescarte().obtenerUltimaCarta().getColor())
+		{
+			sePuede=true;
+		}
 		return sePuede;
 	}
 
+	public int getNumero() 
+	{
+		return -1;
+	}	
+
 }
+
