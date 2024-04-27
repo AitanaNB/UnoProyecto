@@ -12,14 +12,24 @@ public class CartaNum extends Carta
 	
 	public void jugarCarta()
 	{
-		System.out.println("La carta jugada es de color "+getColor()+" y numero"+this.numero);
+		System.out.println("La carta jugada es de color "+getColor()+" y numero "+this.numero);
 	}
 	
+	@Override
 	public boolean puedeUsarse()
 	{
-		//Implementación...
-		boolean sePuede = true;
+		boolean sePuede=true;
+		if (this.getNumero()==PilaDescarte.getPilaDescarte().obtenerUltimaCarta().getNumero())
+		{
+			sePuede=true;
+		}
 		return sePuede;
 	}
+	
+	public int getNumero()
+	{
+		return this.numero;
+	}
+
 
 }
