@@ -30,19 +30,11 @@ public class Baraja
 	public void mostrarBaraja()
 	{
 		Iterator<Carta> itr = getIterador();
+		int pos=1;
 		while (itr.hasNext())
 		{
-			int pos = 1;
 			Carta carta =itr.next();
-			System.out.println("Pos:"+pos+"Color: "+carta.getColor());
-			if (carta instanceof CartaEsp)
-			{
-				System.out.println("Carta toma 2");
-			}
-			else if (carta instanceof CartaNum)
-			{
-				System.out.println("Numero: "+((CartaNum)carta).getNumero());
-			}
+			System.out.println("Pos: "+pos+ "Carta "+carta.toString());
 			pos++;
 		}
 		
