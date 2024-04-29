@@ -18,7 +18,7 @@ public class CartaNum extends Carta
 	@Override
 	public boolean puedeUsarse()
 	{
-		boolean sePuede=true;
+		boolean sePuede=false;
 		if (this.getNumero()==PilaDescarte.getPilaDescarte().obtenerUltimaCarta().getNumero())
 		{
 			sePuede=true;
