@@ -1,34 +1,45 @@
 package org.pmoo.proyecto;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+public class MazoTest {
+    private Mazo mazo;
 
-class MazoTest {
-	private Mazo miMazo;
+    @Before
+    public void setUp() throws Exception {
+        mazo = Mazo.getMazo(); // Obtener la misma instancia de Mazo en todos los tests
+        mazo.inicializarMazo(); // Inicializar el mazo antes de cada prueba
+    }
 
-	@BeforeEach
-	void setUp() throws Exception {
-		miMazo= Mazo.getMazo();
-	}
+    @After
+    public void tearDown() throws Exception {
+        
+    }
+    
+    @Test
+    public void testInicializarMazo() {
+        assertEquals(88, mazo.contarCartas());
+        // Otros casos de prueba...
+    }
 
-	@AfterEach
-	void tearDown() throws Exception {
-	}
+    @Test
+    public void testContarCartas() {
+        assertEquals(88, mazo.contarCartas());
+    }
 
-	@Test
-	void testGetMazo() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testInicializarMazo() 
-	{
-		
-		miMazo.inicializarMazo();
-		
-	}
-
+    @Test 
+    //Caso 1: cuando el mazo queda una única carta
+    public void testQuitarCartasDelMazo_Caso1()
+    {
+    	while(mazo.contarCartas()>1)
+    	{
+    		mazo.quitarCartaDelMazo();
+    	}
+    	assertEquals(1, mazo.contarCartas());
+    	Carta ultimaCarta = mazo.quitarCartaDelMazo();
+    	assertNotNull(ultimaCarta);
+    }
 }
