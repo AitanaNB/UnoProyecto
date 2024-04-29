@@ -1,6 +1,7 @@
 package org.pmoo.proyecto;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Baraja 
 {
@@ -11,7 +12,7 @@ public class Baraja
 		this.lista=new ArrayList<Carta>();
 	}
 	
-	public void añadir(Carta pCarta)
+	public void anadir(Carta pCarta)
 	{
 		this.lista.add(pCarta);
 	}
@@ -25,7 +26,7 @@ public class Baraja
 	{
 		return this.lista.size();
 	}
-
+	
 	public void mostrarBaraja()
 	{
 		Iterator<Carta> itr = getIterador();
@@ -42,6 +43,7 @@ public class Baraja
 			{
 				System.out.println("Numero: "+((CartaNum)carta).getNumero());
 			}
+			pos++;
 		}
 		
 	}
@@ -51,8 +53,11 @@ public class Baraja
 		return this.lista.iterator();
 	}
 
-	public void quitarCarta()
+
+	public Carta obtenerCarta(int pos) 
 	{
-		
+		Carta carta = this.lista.get(pos);
+		return carta;
 	}
+	
 }
