@@ -46,7 +46,7 @@ public abstract class Carta
 	    } 
 	    else if (this instanceof CartaEsp) 
 	    {
-	        return "Carta especial de color " + color;
+	        return "Carta toma 2 de color " + color;
 	    } else 
 	    {
 	        return "Carta desconocida";
