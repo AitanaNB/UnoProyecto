@@ -70,12 +70,9 @@ public class Mazo //MAE que contiene todas las cartas
 	{
 		if (this.lista.isEmpty()) 
 		{
-	        return null;
+			moverCartaDesdePilaDescarte();
 		}
-		else
-		{
 		return this.lista.remove(this.lista.size() - 1);
-		}
 	}
 		
 }
