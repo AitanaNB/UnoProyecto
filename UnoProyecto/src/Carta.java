@@ -34,7 +34,24 @@ public abstract class Carta
 	public int getNumero() 
 	{
 		return -1;
-	}	
+	}
+
+	
+	@Override
+	public String toString() 
+	{
+	    if (this instanceof CartaNum) 
+	    {
+	        return "Carta numérica de color " + color + " y número " + ((CartaNum)this).getNumero();
+	    } 
+	    else if (this instanceof CartaEsp) 
+	    {
+	        return "Carta especial de color " + color;
+	    } else 
+	    {
+	        return "Carta desconocida";
+	    }
+	}
 
 }
 
