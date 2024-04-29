@@ -34,7 +34,7 @@ public class Baraja
 		while (itr.hasNext())
 		{
 			Carta carta =itr.next();
-			System.out.println("Pos: "+pos+ "Carta "+carta.toString());
+			System.out.println("Pos: "+pos+ "Carta: "+carta.toString());
 			pos++;
 		}
 		
