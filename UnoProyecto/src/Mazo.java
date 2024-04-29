@@ -61,14 +61,21 @@ public class Mazo //MAE que contiene todas las cartas
 			i++;
 		} while (i<2);		
 	}
-	public void mezcalrCarta()
+	public void mezclarCarta()
 	{
 		Collections.shuffle(this.lista);
 	}
 	
 	public Carta quitarCartaDelMazo()
 	{
-		return this.lista.get(this.lista.size()-1);
+		if (this.lista.isEmpty()) 
+		{
+	        return null;
+		}
+		else
+		{
+		return this.lista.remove(this.lista.size() - 1);
+		}
 	}
 		
 }
