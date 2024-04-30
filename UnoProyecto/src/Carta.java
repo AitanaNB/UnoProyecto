@@ -9,9 +9,10 @@ public abstract class Carta
 		this.color=pColor;
 	}
 	
-	/*Método ábstracto para jugar una carta que se implementa
-	en CartaNum y CartaEsp*/
-	protected abstract void jugarCarta();
+	public void jugarCarta()
+	{
+		System.out.println("La carta jugada es: " +this.toString());
+	}
 	
 	protected String getColor()
 	{
