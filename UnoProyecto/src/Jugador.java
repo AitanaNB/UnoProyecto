@@ -16,15 +16,17 @@ public class Jugador
 		return this.nombre;
 	}
 
-	public Baraja getBaraja()
+	public void verCartas()
 	{
-		return this.baraja;
+		this.baraja.mostrarBaraja();
 	}
 	
 	public void robarCarta ()
 	{
 		Carta cartaRobada = Mazo.getMazo().quitarCartaDelMazo();
 	    agregarCartaAMano(cartaRobada);
+	    System.out.println("Has robado esta carta ");
+	    System.out.println(cartaRobada.toString());
 	}
 	
 	public void gritarUno()
