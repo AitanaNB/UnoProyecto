@@ -7,9 +7,13 @@ public class PilaDescarte
 	private ArrayList<Carta> lista;
 	public static PilaDescarte miPilaDescarte = new PilaDescarte();
 	
-	public PilaDescarte() 
+	private PilaDescarte() 
 	{
 		this.lista=new ArrayList<Carta>();
+	}
+	public static PilaDescarte getPilaDescarte()
+	{
+		return miPilaDescarte;
 	}
 	
 	public void anadirCarta(Carta pCarta)
