@@ -24,7 +24,7 @@ public class Partida
 		Teclado miTeclado=Teclado.getTeclado();
 		//inicializar mazo y mezclar las cartas		
 		Mazo.getMazo().inicializarMazo();
-		Mazo.getMazo().mezcalrCarta();
+		Mazo.getMazo().mezclarCarta();
 		System.out.println("Mezclando cartas...");
 		
 		System.out.println("");
