@@ -42,11 +42,11 @@ public abstract class Carta
 	{
 	    if (this instanceof CartaNum) 
 	    {
-	        return "Carta numérica de color " + color + " y número " + ((CartaNum)this).getNumero();
+	        return " Carta numérica de color " + color + " y número " + ((CartaNum)this).getNumero();
 	    } 
 	    else if (this instanceof CartaEsp) 
 	    {
-	        return "Carta toma 2 de color " + color;
+	        return " Carta toma 2 de color " + color;
 	    } else 
 	    {
 	        return "Carta desconocida";
