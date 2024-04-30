@@ -15,7 +15,7 @@ public class Jugador
 	{
 		return this.nombre;
 	}
-
+	
 	public void verCartas()
 	{
 		this.baraja.mostrarBaraja();
@@ -24,9 +24,21 @@ public class Jugador
 	public void robarCarta ()
 	{
 		Carta cartaRobada = Mazo.getMazo().quitarCartaDelMazo();
-	    agregarCartaAMano(cartaRobada);
-	    System.out.println("Has robado esta carta ");
-	    System.out.println(cartaRobada.toString());
+	    System.out.println("Has robado esta carta: "+cartaRobada.toString());
+	    if (cartaRobada.puedeUsarse())
+	    {
+	    	PilaDescarte.getPilaDescarte().anadirCarta(cartaRobada);
+	    	System.out.println(nombre + " ha robado una carta y la ha jugado.");
+	    }
+	    else
+	    {
+	    	agregarCartaAMano(cartaRobada);
+	    	cartaRobada = Mazo.getMazo().quitarCartaDelMazo();
+	    	agregarCartaAMano(cartaRobada);
+	    	System.out.println("La primera carta robada no se puede usar. Debes robar otra.");
+	    	System.out.println("\nHas robado esta carta: "+cartaRobada.toString());
+	    }
+	    
 	}
 	
 	public void gritarUno()
@@ -39,31 +51,30 @@ public class Jugador
 	
 	public void usarCarta(int pos)
 	{
-	    if (pos >= 0 && pos < baraja.contar()) {
+	    if (pos >= 0 && pos < baraja.contar()) 
+	    {
 	        Carta carta = baraja.obtenerCarta(pos); //obtiene la carta en la posición pos
 	        if (carta.puedeUsarse()) 
 	        {
+	        	if (carta instanceof CartaEsp)
+	        	{
+	        		Carta cartaRobada = Mazo.getMazo().quitarCartaDelMazo();
+	        		baraja.anadir(cartaRobada);
+	        		Carta cartaRobada2 = Mazo.getMazo().quitarCartaDelMazo();
+	        		baraja.anadir(cartaRobada2);
+	        	}
 	            // La carta puede usarse, la removemos de la baraja del jugador y la agregamos a la pila de descarte
-	            baraja.quitar(carta);
+	            this.baraja.quitar(carta);
 	            PilaDescarte.getPilaDescarte().anadirCarta(carta);
 	            System.out.println(nombre + " ha jugado una carta.");
-	        } 
+	            
+	        }
+	       
 	        else 
 	        {
 	            System.out.println("No puedes jugar esa carta en este momento.");
-	            // El jugador no puede jugar la carta, roba una del mazo
-	            Carta cartaRobada = Mazo.getMazo().quitarCartaDelMazo();
-	            if (cartaRobada.puedeUsarse()) {
-	                // Si la carta robada se puede usar, el jugador la juega inmediatamente
-	                PilaDescarte.getPilaDescarte().anadirCarta(cartaRobada);
-	                System.out.println(nombre + " ha robado una carta y la ha jugado.");
-	            } 
-	            else 
-	            {
-	                // Si la carta robada tampoco se puede usar, el jugador roba otra carta y finaliza su turno
-	                cartaRobada = Mazo.getMazo().quitarCartaDelMazo();
-	                System.out.println(nombre + " ha robado una carta pero no puede jugarla.");
-	            }
+	            // El jugador no puede jugar la carta
+	            this.robarCarta();
 	        }
 	    } 
 	    else 
@@ -74,14 +85,15 @@ public class Jugador
 	
 	public void agregarCartaAMano(Carta pCarta)
 	{
-		baraja.anadir(pCarta);
+		this.baraja.anadir(pCarta);
 	}
 	
 	public boolean turnoTerminado()
 	{
 		return true;
 	}
-
+	
+	
 	public boolean haGanado()
 	{
 		return this.baraja.contar()==0;
