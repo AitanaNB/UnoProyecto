@@ -14,11 +14,6 @@ public class Teclado
 		return miTeclado;
 	}
 	
-	public static int leerEntero(String pMenPrevio) 
-	{
-		System.out.println(pMenPrevio);
-		return sc.nextInt();
-	}
 	
 	public static String leerString(String pMenPrevio)
 	{
