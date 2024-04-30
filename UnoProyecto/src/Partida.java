@@ -1,6 +1,6 @@
 package org.pmoo.proyecto;
 
-public class Partida 
+public class Partida
 {
 	private Jugador jugador1;
 	private Jugador jugador2;
@@ -10,14 +10,15 @@ public class Partida
 	private Partida ()
 	{}
 	
-	public static Partida getPartida()
+	public static Partida getPartida() throws NoEsOpcionException
 	{
 		return miPartida;
 	}
 	
-	public void jugarPartida()
+	public void jugarPartida() throe
 	{
 		Teclado miTeclado=Teclado.getTeclado();
+		int posCarta=0;
 		System.out.println("*********¡¡¡¡¡¡¡BIENVENIDO A LA PARTIDA!!!!!!!*********");
 		
 		//Inicializar mazo y mezclar las cartas		
@@ -74,9 +75,29 @@ public class Partida
 		    if (opcion.equals("J") || opcion.equals("j")) 
 		    { // Decide jugar
 		        System.out.println("Teclea el valor de la posición de la carta que quieras jugar.");
-		        System.out.println("Si escoges una carta que no puedes jugar, robas :) ");
-		        posCarta = Integer.parseInt(miTeclado.leerString("Recuerda darle a enter :3 "));
-		        jugadorActual.usarCarta(posCarta - 1);
+		        System.out.println("");
+		        
+		        String input = miTeclado.leerString("Recuerda darle a enter :3 ");
+		        		
+		        
+		        //excepcion si el usuario no introduce un numero por teclado
+		        boolean todoBajoControl = false;
+		        do {
+		        	try {	
+		        			posCarta = Integer.parseInt(input);
+		        	 		jugadorActual.usarCarta(posCarta - 1);
+		        			todoBajoControl= true;
+		        		}
+		        	catch (NumberFormatException nfe)
+		        	{
+		        		input="0";	
+		        		System.out.println("Ha ocurrido NumberFormatException");
+		        			
+		        	}
+		        } while (!todoBajoControl);
+		        jugadorActual.usarCarta(posCarta);
+		        
+		        System.out.println("");
 		        if (PilaDescarte.getPilaDescarte().obtenerUltimaCarta() instanceof CartaEsp)
 			    {
 			    	if(jugadorActual==jugador1)
@@ -98,10 +119,12 @@ public class Partida
 		    } 
 		    else 
 		    {
-		        System.out.println("R o J por favor ");
+			System.out.println("No has introducido una de las opciones");
+		       System.out.println("\nGAME OVER");
+		       throw (new NoEsOpcionException());
 		    }
 		    
-		    
+		    jugadorActua.gritarUno();
 		    if (!jugadorActual.haGanado())
 		    {
 		    	turnoJugador(); // Cambia de jugador
