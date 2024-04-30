@@ -26,15 +26,15 @@ public class PilaDescarte
 		return this.lista.get(this.lista.size()-1);
 	}
 
-	public ArrayList<Carta> obtenerCartasSinUltima()
+public ArrayList<Carta> obtenerCartasSinUltima()
 	{
+		int longitud= this.lista.size();
 		ArrayList<Carta> listaSinUlt = new ArrayList<Carta>();
-		for (int i=0; i<this.lista.size()-1; i++)
+		for (int i=0; i<longitud-1; i++)
 		{
-			listaSinUlt.add(lista.get(i));
-			this.lista.remove(i);
+			listaSinUlt.add(lista.get(1));
+			this.lista.remove(1);
 		}
 		return listaSinUlt;
 	}
-	
 }
