@@ -154,13 +154,27 @@ public class Partida
 	
 	private boolean finalizarPartida()
 	{
-		boolean finalizado=true;
-		return finalizado;
+		boolean finalizado =false;
+		if (jugador1.haGanado() || jugador2.haGanado())
+		{
+			finalizado= true;
+		}
+		
 	}
 	
 	public void turnoJugador()
 	{
-		
+	if (jugadorActual.turnoTerminado()) //no hace falta xq se cambia directamente
+		{
+			if (jugadorActual==jugador1)
+			{
+				jugadorActual=jugador2;
+			}
+			else 
+			{
+				jugadorActual=jugador1;	
+			}
+		}	
 	}
 
 
