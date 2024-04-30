@@ -25,15 +25,6 @@ public class PilaDescarte
 	{
 		return this.lista.get(this.lista.size()-1);
 	}
-	public boolean puedeUsarse(Carta pCarta)
-	{
-		boolean siPuede=false;
-		if(this.obtenerUltimaCarta().getColor()==pCarta.getColor() || this.obtenerUltimaCarta().getNum()==pCarta.getNum())
-		{
-			siPuede=!siPuede;
-		}
-		return siPuede;
-	}
 
 	public ArrayList<Carta> obtenerCartasSinUltima()
 	{
