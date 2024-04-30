@@ -5,20 +5,20 @@ public class Jugador
 	private String nombre;
 	private Baraja baraja;
 	
-	public Jugador (String pNombre, Baraja pBaraja)
+	public Jugador (String pNombre)
 	{
 		this.nombre=pNombre;
-		this.baraja=pBaraja;
+		this.baraja=new Baraja();
 	}
 	
 	public String getNombre()
 	{
 		return this.nombre;
 	}
-	
-	public void setNombre(String pNombre) 
+
+	public Baraja getBaraja()
 	{
-		this.nombre=pNombre;
+		return this.baraja;
 	}
 	
 	public void robarCarta ()
