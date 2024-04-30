@@ -74,6 +74,28 @@ public class Mazo //MAE que contiene todas las cartas
 		}
 		return this.lista.remove(this.lista.size() - 1);
 	}
+	
+	public void anadirCartaAlMazo(Carta pCarta)
+	{
+		this.lista.add(pCarta);
+	}
+	
+	public int contarCartas()
+	{
+		return this.lista.size();
+	}
+
+	/*Pasa todas las cartas de la pila de descartes 
+	 menos la última jugada al mazo*/
+	public void moverCartaDesdePilaDescarte() 
+	{
+		PilaDescarte pDescarte = PilaDescarte.getPilaDescarte();
+		ArrayList<Carta> listaAMover = pDescarte.obtenerCartasSinUltima();
+		for (int i=0; i>listaAMover.size(); i++)
+		{
+			Carta actual= listaAMover.get(i);
+			anadirCartaAlMazo(actual);
+		}
 		
 }
 
