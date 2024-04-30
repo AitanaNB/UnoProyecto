@@ -14,13 +14,13 @@ public class CartaNum extends Carta
 	public boolean puedeUsarse()
 	{
 		boolean sePuede=false;
-		if (this.getNumero()==PilaDescarte.getPilaDescarte().obtenerUltimaCarta().getNumero())
+		if (this.getNumero()==PilaDescarte.getPilaDescarte().obtenerUltimaCarta().getNumero() || (this.getColor().equals(PilaDescarte.getPilaDescarte().obtenerUltimaCarta().getColor())))
 		{
 			sePuede=true;
 		}
 		return sePuede;
 	}
-
+	
 	@Override
 	public int getNumero()
 	{
