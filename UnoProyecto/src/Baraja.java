@@ -35,6 +35,7 @@ public class Baraja
 		{
 			Carta carta =itr.next();
 			System.out.println("Pos: "+pos+ "Carta: "+carta.toString());
+			System.out.println("");
 			pos++;
 		}
 		
