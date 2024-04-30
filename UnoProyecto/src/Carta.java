@@ -9,11 +9,6 @@ public abstract class Carta
 		this.color=pColor;
 	}
 	
-	public void jugarCarta()
-	{
-		System.out.println("La carta jugada es: " +this.toString());
-	}
-	
 	protected String getColor()
 	{
 		return this.color;
