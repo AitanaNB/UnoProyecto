@@ -10,11 +10,6 @@ public class CartaNum extends Carta
 		this.numero=pNum;
 	}
 	
-	public void jugarCarta()
-	{
-		System.out.println("La carta jugada es de color "+getColor()+" y numero "+this.numero);
-	}
-	
 	@Override
 	public boolean puedeUsarse()
 	{
@@ -25,7 +20,8 @@ public class CartaNum extends Carta
 		}
 		return sePuede;
 	}
-	
+
+	@Override
 	public int getNumero()
 	{
 		return this.numero;
