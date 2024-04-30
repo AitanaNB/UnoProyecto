@@ -81,4 +81,9 @@ public class Jugador
 	{
 		return true;
 	}
+
+	public boolean haGanado()
+	{
+		return this.baraja.contar()==0;
+	}
 }
