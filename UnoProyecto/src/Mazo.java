@@ -91,7 +91,7 @@ public class Mazo //MAE que contiene todas las cartas
 	{
 		PilaDescarte pDescarte = PilaDescarte.getPilaDescarte();
 		ArrayList<Carta> listaAMover = pDescarte.obtenerCartasSinUltima();
-		for (int i=0; i>listaAMover.size(); i++)
+		for (int i=0; i<listaAMover.size(); i++)
 		{
 			Carta actual= listaAMover.get(i);
 			anadirCartaAlMazo(actual);
