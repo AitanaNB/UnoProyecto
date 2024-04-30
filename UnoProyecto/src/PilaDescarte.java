@@ -34,5 +34,16 @@ public class PilaDescarte
 		}
 		return siPuede;
 	}
+
+	public ArrayList<Carta> obtenerCartasSinUltima()
+	{
+		ArrayList<Carta> listaSinUlt = new ArrayList<Carta>();
+		for (int i=0; i<this.lista.size()-1; i++)
+		{
+			listaSinUlt.add(lista.get(i));
+			this.lista.remove(i);
+		}
+		return listaSinUlt;
+	}
 	
 }
