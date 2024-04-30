@@ -60,83 +60,39 @@ public class Partida
         int posCarta; //posicion de la carta que decide jugar
         
 	while (!finalizarPartida())
-        {
-        	
-		if (jugadorActual==jugador1) //turno del jugador1
-		{		
-			System.out.println(nombreJugador1 + ", estas son tus cartas:");
-			System.out.println("..........................................");
-			System.out.println();
-			this.jugador1.verCartas();
-        
-			System.out.println("..........................................");
-			System.out.println("Pulsa R para robar, o J para jugar. ");
-        
-			String opcion = Teclado.leerString("Pulsa enter");
-			
-			if (opcion.equals("J") || opcion.equals("j")) //decide jugar
-			{
-				System.out.println("Teclea el valor de la posición de la carta que quieras jugar.");
-				System.out.println("Si escoges una carta que no puedes jugar, robas :) ");
-				posCarta=miTeclado.leerString("Recuerda darle a enter :3 ");
-				jugador1.usarCarta(Integer.parseInt(posCarta)-1);
-				this.turnoJugador();
-				
-				
-			}
-			else if (opcion.equals("R") || opcion.equals("r")) //decide robar
-			{
-				jugador1.robarCarta();
-				System.out.println("");
-							
-			}
-			else 
-			{
-				System.out.println("R o J por favor ");
-				
-			}
-			
-			jugador1.haGanado();
-			this.jugadorActual=jugador2;
-			       
-		}
-		if (jugadorActual==jugador2)
 		{
-			
-			System.out.println(nombreJugador2 + ", estas son tus cartas:");
-			System.out.println("..........................................");
-			System.out.println();
-			this.jugador2.verCartas();
-        
-			System.out.println("..........................................");
-			System.out.println("Pulsa R para robar, o J para jugar. ");
-        
-			String opcion = miTeclado.leerString("Pulsa enter");
-			
-			if (opcion.equals("J") || opcion.equals("j")) //decide jugar
-			{
-				System.out.println("Teclea el valor de la posición de la carta que quieras jugar.");
-				System.out.println("Si escoges una carta que no puedes jugar, robas :) ");
-				posCarta=miTeclado.leerString("Recuerda darle a enter :3 ");
-				jugador2.usarCarta(Integer.parseInt(posCarta)-1);
-				this.turnoJugador();
-				
-				
-			}
-			else if (opcion.equals("R") || opcion.equals("r")) //decide robar
-			{
-				jugador2.robarCarta();
-				System.out.println("");			
-				
-			}
-			else 
-			{
-				System.out.println("R o J por favor ");
-			}
-			jugador2.haGanado();
-			turnoJugador();
+			System.out.println(jugadorActual.getNombre() + ", estas son tus cartas:");
+		    System.out.println("..........................................");
+		    System.out.println();
+		    jugadorActual.verCartas();
+
+		    System.out.println("..........................................");
+		    System.out.println("Pulsa R para robar, o J para jugar. ");
+
+		    String opcion = miTeclado.leerString("Pulsa enter");
+
+		    if (opcion.equals("J") || opcion.equals("j")) 
+		    { // Decide jugar
+		        System.out.println("Teclea el valor de la posición de la carta que quieras jugar.");
+		        System.out.println("Si escoges una carta que no puedes jugar, robas :) ");
+		        posCarta = Integer.parseInt(miTeclado.leerString("Recuerda darle a enter :3 "));
+		        jugadorActual.usarCarta(posCarta - 1);
+		    } else if (opcion.equals("R") || opcion.equals("r")) 
+		    { // Decide robar
+		        jugadorActual.robarCarta();
+		        System.out.println("");
+		    } 
+		    else 
+		    {
+		        System.out.println("R o J por favor ");
+		    }
+
+		    if (!jugadorActual.haGanado())
+		    {
+		    	turnoJugador(); // Cambia al siguiente jugador
+		    }
+		    
 		}
-		
         }
         System.out.println("¡¡¡¡¡¡ENHORABUENA "+ jugadorActual.getNombre() + "HAS GANADO!!!!!!!");	
 	
