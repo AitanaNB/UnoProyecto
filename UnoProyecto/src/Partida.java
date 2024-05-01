@@ -15,10 +15,10 @@ public class Partida
 		return miPartida;
 	}
 	
-	public void jugarPartida() throe
+	public void jugarPartida() throws NumberFormatException, NoEsOpcionException
 	{
 		Teclado miTeclado=Teclado.getTeclado();
-		int posCarta=0;
+		
 		System.out.println("*********¡¡¡¡¡¡¡BIENVENIDO A LA PARTIDA!!!!!!!*********");
 		
 		//Inicializar mazo y mezclar las cartas		
@@ -30,11 +30,11 @@ public class Partida
 		//Asignar el nombre a los jugadores
 		System.out.println("Introduce el nombre del jugador 1:");
        	String nombreJugador1 = miTeclado.leerString("Pulsa enter");
-        jugador1 = new Jugador(nombreJugador1);//, null); // llamar a la constructora en vez de setter
+        jugador1 = new Jugador(nombreJugador1);// llamar a la constructora en vez de setter
 
         System.out.println("Introduce el nombre del jugador 2:");
         String nombreJugador2 = miTeclado.leerString("Pulsa enter");
-        jugador2 = new Jugador(nombreJugador2);//, null);
+        jugador2 = new Jugador(nombreJugador2);
 
         System.out.println("Los jugadores son: " + jugador1.getNombre() + " y " + jugador2.getNombre());
         
@@ -92,9 +92,12 @@ public class Partida
 		        	{
 		        		input="0";	
 		        		System.out.println("Ha ocurrido NumberFormatException");
+		        		System.out.println("Posición introducida inválida");
 		        			
 		        	}
 		        } while (!todoBajoControl);
+		        
+		        posCarta = Integer.parseInt(input);
 		        jugadorActual.usarCarta(posCarta);
 		        
 		        System.out.println("");
@@ -124,7 +127,7 @@ public class Partida
 		       throw (new NoEsOpcionException());
 		    }
 		    
-		    jugadorActua.gritarUno();
+		    jugadorActual.gritarUno();
 		    if (!jugadorActual.haGanado())
 		    {
 		    	turnoJugador(); // Cambia de jugador
@@ -173,4 +176,3 @@ public class Partida
 	}
 
 
-}
