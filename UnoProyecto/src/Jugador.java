@@ -4,6 +4,7 @@ public class Jugador
 {
 	private String nombre;
 	private Baraja baraja;
+	private boolean haJugado=false;
 	
 	public Jugador (String pNombre)
 	{
@@ -24,11 +25,12 @@ public class Jugador
 	public void robarCarta ()
 	{
 		Carta cartaRobada = Mazo.getMazo().quitarCartaDelMazo();
-	    System.out.println("Has robado esta carta: "+cartaRobada.toString());
+	    System.out.println("\nHas robado esta carta: "+cartaRobada.toString());
 	    if (cartaRobada.puedeUsarse())
 	    {
 	    	PilaDescarte.getPilaDescarte().anadirCarta(cartaRobada);
 	    	System.out.println(nombre + " ha robado una carta y la ha jugado.");
+	    	this.haJugado=true;
 	    }
 	    else
 	    {
@@ -45,7 +47,7 @@ public class Jugador
 	{
 		if (baraja.contar()==1)
 		{
-			System.out.println("¡¡¡UNO!!!");
+			System.out.println("\n"+this.nombre+" grita:   ¡¡¡UNO!!!");
 		}
 	}
 	
@@ -56,20 +58,12 @@ public class Jugador
 	        Carta carta = baraja.obtenerCarta(pos); //obtiene la carta en la posición pos
 	        if (carta.puedeUsarse()) 
 	        {
-	        	if (carta instanceof CartaEsp)
-	        	{
-	        		Carta cartaRobada = Mazo.getMazo().quitarCartaDelMazo();
-	        		baraja.anadir(cartaRobada);
-	        		Carta cartaRobada2 = Mazo.getMazo().quitarCartaDelMazo();
-	        		baraja.anadir(cartaRobada2);
-	        	}
 	            // La carta puede usarse, la removemos de la baraja del jugador y la agregamos a la pila de descarte
 	            this.baraja.quitar(carta);
 	            PilaDescarte.getPilaDescarte().anadirCarta(carta);
 	            System.out.println(nombre + " ha jugado una carta.");
-	            
+	            this.haJugado=true;
 	        }
-	       
 	        else 
 	        {
 	            System.out.println("No puedes jugar esa carta en este momento.");
@@ -79,7 +73,7 @@ public class Jugador
 	    } 
 	    else 
 	    {
-	        System.out.println("Posición de carta inválida.");
+	    	System.out.println("Posición de carta inválida.");
 	    }
 	}
 	
@@ -97,5 +91,10 @@ public class Jugador
 	public boolean haGanado()
 	{
 		return this.baraja.contar()==0;
+	}
+	
+	public boolean haJugado()
+	{
+		return haJugado;
 	}
 }
