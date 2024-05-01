@@ -19,13 +19,13 @@ public abstract class Carta
 		/*Comprueba que el color de la carta actual coincide con
 		el de la pila de descarte*/
 		boolean sePuede=false;
-		if (this.getColor()==PilaDescarte.getPilaDescarte().obtenerUltimaCarta().getColor())
+		if (this.getColor().equals(PilaDescarte.getPilaDescarte().obtenerUltimaCarta().getColor()))
 		{
 			sePuede=true;
 		}
 		return sePuede;
 	}
-
+	
 	public int getNumero() 
 	{
 		return -1;
