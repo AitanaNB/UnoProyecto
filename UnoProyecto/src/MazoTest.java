@@ -2,6 +2,8 @@ package org.pmoo.proyecto;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,11 +11,15 @@ import org.junit.Test;
 public class MazoTest {
     private Mazo mazo;
     private PilaDescarte descarte;
+    Carta carta1, carta2, carta3;
     @Before
     public void setUp() throws Exception {
         mazo = Mazo.getMazo(); // Obtener la misma instancia de Mazo en todos los tests
         descarte= PilaDescarte.getPilaDescarte();
         mazo.inicializarMazo(); // Inicializar el mazo antes de cada prueba
+        carta1= new CartaNum("Amarillo",4);
+		carta2= new CartaNum("Amarillo",3);
+		carta3= new CartaNum("Amarillo",2);
     }
 
     @After
@@ -33,7 +39,7 @@ public class MazoTest {
     }
 
     @Test 
-    //Caso 1: cuando el mazo queda una única carta
+    //Caso 1: cuando el mazo queda una Ãºnica carta
     public void testQuitarCartasDelMazo_Caso1()
     {
     	while(mazo.contarCartas()>1)
@@ -74,5 +80,36 @@ public class MazoTest {
     	Carta unaCarta= new CartaNum("Amarillo",4);
     	mazo.anadirCartaAlMazo(unaCarta);
     	assertEquals(mazo.contarCartas(),89);
+    }
+    
+    @Test
+    //Caso 1: Se mezclan cartas de un mazo no vacio
+    public void testMezclarCarta1()
+    {
+    	mazo.vaciarMazo();
+    	mazo.anadirCartaAlMazo(carta1);
+    	mazo.anadirCartaAlMazo(carta2);
+    	mazo.anadirCartaAlMazo(carta3);
+    	mazo.mezclarCarta();
+    	assertEquals(mazo.contarCartas(),3);
+    }
+    
+    @Test
+    //Caso 2: Se mezclan cartas de un mazo con una sola carta
+    public void testMezclarCarta2()
+    {
+    	mazo.vaciarMazo();
+    	mazo.anadirCartaAlMazo(carta1);
+    	mazo.mezclarCarta();
+    	assertEquals(mazo.contarCartas(),1);
+    }
+    
+    @Test
+    //Caso 3: Se mezclan cartas de un mazo vacio
+    public void testMezclarCarta3()
+    {
+    	mazo.vaciarMazo();
+    	mazo.mezclarCarta();
+    	assertEquals(mazo.contarCartas(),0);
     }
 }
