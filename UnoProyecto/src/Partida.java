@@ -85,7 +85,7 @@ public class Partida
 		        do {
 		        	try {	
 		        			posCarta = Integer.parseInt(input);
-		        	 		jugadorActual.usarCarta(posCarta - 1);
+		        	 		//jugadorActual.usarCarta(posCarta - 1);
 		        			todoBajoControl= true;
 		        		}
 		        	catch (NumberFormatException nfe)
@@ -98,21 +98,7 @@ public class Partida
 		        } while (!todoBajoControl);
 		        
 		        posCarta = Integer.parseInt(input);
-		        jugadorActual.usarCarta(posCarta);
-		        
-		        System.out.println("");
-		        if (PilaDescarte.getPilaDescarte().obtenerUltimaCarta() instanceof CartaEsp)
-			    {
-			    	if(jugadorActual==jugador1)
-			    	{
-			    		repartirCartas(jugador2, 2);
-			    	}
-			    	else
-			    	{
-			    		repartirCartas(jugador1, 2);
-			    	}
-			    	
-			    }
+		        jugadorActual.usarCarta(posCarta-1);
 		        
 		    } 
 		    else if (opcion.equals("R") || opcion.equals("r")) 
@@ -125,6 +111,21 @@ public class Partida
 			System.out.println("No has introducido una de las opciones");
 		       System.out.println("\nGAME OVER");
 		       throw (new NoEsOpcionException());
+		    }
+		    
+		    
+		    System.out.println("");
+	        if (PilaDescarte.getPilaDescarte().obtenerUltimaCarta() instanceof CartaEsp && jugadorActual.haJugado())
+		    {
+		    	if(jugadorActual==jugador1)
+		    	{
+		    		repartirCartas(jugador2, 2);
+		    	}
+		    	else
+		    	{
+		    		repartirCartas(jugador1, 2);
+		    	}
+		    	
 		    }
 		    
 		    jugadorActual.gritarUno();
@@ -175,4 +176,6 @@ public class Partida
 		}	
 	}
 
+
+}
 
