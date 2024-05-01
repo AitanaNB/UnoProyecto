@@ -57,8 +57,6 @@ public class Partida
         }
         System.out.println("Se empieza con la carta: "+primeraC.toString());
         
-        int posCarta; //Posicion de la carta que decide jugar
-        
         //Bucle principal del juego
 		while (!finalizarPartida())
 		{	
@@ -81,24 +79,27 @@ public class Partida
 		        		
 		        
 		        //excepcion si el usuario no introduce un numero por teclado
+			int posCarta=0;
 		        boolean todoBajoControl = false;
 		        do {
 		        	try {	
-		        			posCarta = Integer.parseInt(input);
+		        			posCarta = Integer.parseInt(input)-1;
 		        	 		//jugadorActual.usarCarta(posCarta - 1);
 		        			todoBajoControl= true;
 		        		}
 		        	catch (NumberFormatException nfe)
 		        	{
-		        		input="0";	
+		        		input="1";	
 		        		System.out.println("Ha ocurrido NumberFormatException");
-		        		System.out.println("Posición introducida inválida");
+		        		System.out.println("Esa no posición no vele :/ ");
+		        		System.out.println("Se establece la posición uno por defecto");
+		        		System.out.println("");
 		        			
 		        	}
 		        } while (!todoBajoControl);
 		        
-		        posCarta = Integer.parseInt(input);
-		        jugadorActual.usarCarta(posCarta-1);
+		    	jugadorActual.usarCarta(posCarta);
+			System.out.println("");    
 		        
 		    } 
 		    else if (opcion.equals("R") || opcion.equals("r")) 
