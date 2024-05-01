@@ -4,7 +4,7 @@ public class Jugador
 {
 	private String nombre;
 	private Baraja baraja;
-	private boolean haJugado=false;
+	private boolean haJugado = false;
 	
 	public Jugador (String pNombre)
 	{
@@ -30,7 +30,7 @@ public class Jugador
 	    {
 	    	PilaDescarte.getPilaDescarte().anadirCarta(cartaRobada);
 	    	System.out.println(nombre + " ha robado una carta y la ha jugado.");
-	    	this.haJugado=true;
+	    	this.haJugado = true;
 	    }
 	    else
 	    {
@@ -38,7 +38,8 @@ public class Jugador
 	    	cartaRobada = Mazo.getMazo().quitarCartaDelMazo();
 	    	agregarCartaAMano(cartaRobada);
 	    	System.out.println("La primera carta robada no se puede usar. Debes robar otra.");
-	    	System.out.println("\nHas robado esta carta: "+cartaRobada.toString());
+	    	System.out.println("\nHas robado otra carta: "+cartaRobada.toString());
+	    	this.haJugado=false;
 	    }
 	    
 	}
@@ -67,13 +68,9 @@ public class Jugador
 	        else 
 	        {
 	            System.out.println("No puedes jugar esa carta en este momento.");
-	            // El jugador no puede jugar la carta
+	            // El jugador no puede jugar la carta y roba carta
 	            this.robarCarta();
 	        }
-	    } 
-	    else 
-	    {
-	    	System.out.println("Posición de carta inválida.");
 	    }
 	}
 	
@@ -94,7 +91,8 @@ public class Jugador
 	}
 	
 	public boolean haJugado()
-	{
-		return haJugado;
-	}
+    {
+        return this.haJugado;
+    }
+	
 }
