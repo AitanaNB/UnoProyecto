@@ -23,9 +23,9 @@ public class Mazo
 	{
 		String[] colores = {"rojo", "azul", "verde", "amarillo"};
 	    
-		this.lista.clear(); //Limpia el mazo antes de añadir cartas
+		this.lista.clear(); //Limpia el mazo antes de aÃ±adir cartas
 		
-	    // Se añade cartas numeradas y cartas "Toma Dos" para cada color
+	    // Se aÃ±ade cartas numeradas y cartas "Toma Dos" para cada color
 	    for (String color : colores) {
 	        // Agregar cartas numeradas
 	        for (int numero = 0; numero <= 9; numero++) {
@@ -71,18 +71,9 @@ public class Mazo
 		if (!this.lista.isEmpty()) {
 	        return this.lista.remove(this.lista.size() - 1);
 	    } else {
-	        throw new NoHayMasCartasException(); // Lanzar excepción si no hay cartas en el mazo
+	        throw new NoHayMasCartasException(); // Lanzar excepciÃ³n si no hay cartas en el mazo
 	    }
 	}
-	
-	/*public Carta quitarCartaDelMazo()
-	{
-		if (this.lista.isEmpty()) 
-		{
-			moverCartaDesdePilaDescarte();
-		}
-		return this.lista.remove(this.lista.size() - 1);
-	}*/
 	
 	public void anadirCartaAlMazo(Carta pCarta)
 	{
