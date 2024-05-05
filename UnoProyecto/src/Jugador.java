@@ -22,7 +22,7 @@ public class Jugador
 		this.baraja.mostrarBaraja();
 	}
 	
-	public void robarCarta ()
+	public void robarCarta () throws NoHayMasCartasException
 	{
 		Carta cartaRobada = Mazo.getMazo().quitarCartaDelMazo();
 	    System.out.println("\nHas robado esta carta: "+cartaRobada.toString());
@@ -52,7 +52,7 @@ public class Jugador
 		}
 	}
 	
-	public void usarCarta(int pos)
+	public void usarCarta(int pos) throws NoHayMasCartasException
 	{
 	    if (pos >= 0 && pos < baraja.contar()) 
 	    {
@@ -71,6 +71,10 @@ public class Jugador
 	            // El jugador no puede jugar la carta y roba carta
 	            this.robarCarta();
 	        }
+	    }
+	    else
+	    {
+	    	System.out.println("Posición inválida. Salta de turno.");
 	    }
 	}
 	
