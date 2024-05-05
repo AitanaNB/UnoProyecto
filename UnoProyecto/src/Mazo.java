@@ -3,99 +3,110 @@ package org.pmoo.proyecto;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Mazo //MAE que contiene todas las cartas
+
+public class Mazo 
 {
-	private static Mazo miMazo= new Mazo();
 	private ArrayList<Carta> lista;
+	private static Mazo miMazo = new Mazo();
 	
 	private Mazo()
 	{
-		this.lista = new ArrayList<Carta>();
-		
+		this.lista=new ArrayList<Carta>();
 	}
-	public static Mazo getMazo()
+	
+	public static Mazo getMazo() 
 	{
 		return miMazo;
 	}
 	
-	public void inicializarMazo() //crea la baraja de cartas
+	public void inicializarMazo()
 	{
-		int i=0;
-		do { 
-			//a√±adir las cartas con n√∫meros
-			CartaNum estaCarta= new CartaNum("Rojo", i);
-			miMazo.lista.add(estaCarta);
-			miMazo.lista.add(estaCarta);
-			//System.out.println("color"+estaCarta.getColor()+"Numero"+estaCarta.getNum());
-			
-			estaCarta= new CartaNum("Amarillo", i);
-			miMazo.lista.add(estaCarta);
-			miMazo.lista.add(estaCarta);
-			
-			estaCarta= new CartaNum("Verde", i);
-			miMazo.lista.add(estaCarta);
-			miMazo.lista.add(estaCarta);
-			
-			estaCarta= new CartaNum("Azul", i);
-			miMazo.lista.add(estaCarta);
-			miMazo.lista.add(estaCarta);
-			
-			i++;			
-		}while (i<10);
+		String[] colores = {"rojo", "azul", "verde", "amarillo"};
+	    
+		this.lista.clear(); //Limpia el mazo antes de aÒadir cartas
 		
-		//a√±adir las cartas especiales
-		i=0;
-		do {
-			CartaEsp estaEsp= new CartaEsp("Rojo");
-			miMazo.lista.add(estaEsp);
-			
-			estaEsp= new CartaEsp("Amarillo");
-			miMazo.lista.add(estaEsp);
-			
-			estaEsp= new CartaEsp("Verde");
-			miMazo.lista.add(estaEsp);
-			
-			estaEsp= new CartaEsp("Azul");
-			miMazo.lista.add(estaEsp);
-			
-			i++;
-		} while (i<2);		
+	    // Se aÒade cartas numeradas y cartas "Toma Dos" para cada color
+	    for (String color : colores) {
+	        // Agregar cartas numeradas
+	        for (int numero = 0; numero <= 9; numero++) {
+	            for (int i = 0; i < 2; i++) {
+	                CartaNum cartaNumerada = new CartaNum(color, numero);
+	                anadirCartaAlMazo(cartaNumerada);
+	            }
+	        }
+	        
+	        // Agregar cartas "Toma Dos"
+	        for (int i = 0; i < 2; i++) {
+	            CartaEsp cartaTomaDos = new CartaEsp(color);
+	            anadirCartaAlMazo(cartaTomaDos);
+	        }
+	    }
+	    mezclarCarta();
 	}
+	
 	public void mezclarCarta()
 	{
 		Collections.shuffle(this.lista);
 	}
 	
-	public Carta quitarCartaDelMazo()
+
+	public Carta quitarCartaDelMazo() throws NoHayMasCartasException 
+	{
+		boolean todoCorrecto=false;
+		do {
+			try {
+				this.contarCartas();
+				todoCorrecto=true;
+			}catch (NoHayMasCartasException nhmce) {
+				System.out.println("************************");
+				System.out.println("NoHayMasCartasException");
+				System.out.println("\nNo hay cartas en el mazo");
+				moverCartaDesdePilaDescarte();
+				System.out.println("Moviendo cartas");
+				System.out.println("************************");
+				mezclarCarta();
+				todoCorrecto=true;
+			}
+		} while(!todoCorrecto);
+		if (!this.lista.isEmpty()) {
+	        return this.lista.remove(this.lista.size() - 1);
+	    } else {
+	        throw new NoHayMasCartasException(); // Lanzar excepciÛn si no hay cartas en el mazo
+	    }
+	}
+	
+	/*public Carta quitarCartaDelMazo()
 	{
 		if (this.lista.isEmpty()) 
 		{
 			moverCartaDesdePilaDescarte();
 		}
 		return this.lista.remove(this.lista.size() - 1);
-	}
+	}*/
 	
 	public void anadirCartaAlMazo(Carta pCarta)
 	{
 		this.lista.add(pCarta);
 	}
 	
-	public int contarCartas()
+	public int contarCartas() throws NoHayMasCartasException
 	{
+		if (this.lista.size()==0)
+		{
+			throw (new NoHayMasCartasException());
+		}
+		
 		return this.lista.size();
 	}
 
-	/*Pasa todas las cartas de la pila de descartes 
-	 menos la √∫ltima jugada al mazo*/
-	public void moverCartaDesdePilaDescarte() 
+	
+	public void moverCartaDesdePilaDescarte()
 	{
 		PilaDescarte pDescarte = PilaDescarte.getPilaDescarte();
 		ArrayList<Carta> listaAMover = pDescarte.obtenerCartasSinUltima();
-		for (int i=0; i<listaAMover.size(); i++)
+		for (Carta actual: listaAMover)
 		{
-			Carta actual= listaAMover.get(i);
 			anadirCartaAlMazo(actual);
 		}
-		
+	}
 }
-
