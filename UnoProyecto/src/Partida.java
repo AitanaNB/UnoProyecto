@@ -15,11 +15,11 @@ public class Partida
 		return miPartida;
 	}
 	
-	public void jugarPartida() throws NumberFormatException, NoEsOpcionException
+	public void jugarPartida() throws NumberFormatException, NoEsOpcionException, NoHayMasCartasException
 	{
 		Teclado miTeclado=Teclado.getTeclado();
 		
-		System.out.println("*********Â¡Â¡Â¡Â¡Â¡Â¡Â¡BIENVENIDO A LA PARTIDA!!!!!!!*********");
+		System.out.println("*********¡¡¡¡¡¡¡BIENVENIDO A LA PARTIDA!!!!!!!*********");
 		
 		//Inicializar mazo y mezclar las cartas		
 		Mazo.getMazo().inicializarMazo();
@@ -72,7 +72,7 @@ public class Partida
 
 		    if (opcion.equals("J") || opcion.equals("j")) 
 		    { // Decide jugar
-		        System.out.println("Teclea el valor de la posiciÃ³n de la carta que quieras jugar.");
+		        System.out.println("Teclea el valor de la posición de la carta que quieras jugar.");
 		        System.out.println("");
 		        
 		        String input = miTeclado.leerString("Recuerda darle a enter :3 ");
@@ -84,15 +84,14 @@ public class Partida
 		        do {
 		        	try {	
 		        			posCarta = Integer.parseInt(input)-1;
-		        	 		//jugadorActual.usarCarta(posCarta - 1);
 		        			todoBajoControl= true;
 		        		}
 		        	catch (NumberFormatException nfe)
 		        	{
 		        		input="1";	
 		        		System.out.println("Ha ocurrido NumberFormatException");
-		        		System.out.println("Esa no posiciÃ³n no vele :/ ");
-		        		System.out.println("Se establece la posiciÃ³n uno por defecto");
+		        		System.out.println("Esa no posición no vale :/ ");
+		        		System.out.println("Se establece la posición uno por defecto");
 		        		System.out.println("");
 		        			
 		        	}
@@ -109,7 +108,7 @@ public class Partida
 		    } 
 		    else 
 		    {
-			System.out.println("No has introducido una de las opciones");
+			System.out.println("No has introducido ninguna de las opciones");
 		       System.out.println("\nGAME OVER");
 		       throw (new NoEsOpcionException());
 		    }
@@ -135,13 +134,13 @@ public class Partida
 		    	turnoJugador(); // Cambia de jugador
 		    }
 		    System.out.println("\n.......................................................................");
-		    System.out.println("\nÃšltima carta jugada: "+ PilaDescarte.getPilaDescarte().obtenerUltimaCarta());
+		    System.out.println("\nÚltima carta jugada: "+ PilaDescarte.getPilaDescarte().obtenerUltimaCarta());
 		}
-		System.out.println("Â¡Â¡Â¡Â¡Â¡Â¡ENHORABUENA "+ jugadorActual.getNombre() + "HAS GANADO!!!!!!!");
+		System.out.println("¡¡¡¡¡¡ENHORABUENA "+ jugadorActual.getNombre() + " HAS GANADO!!!!!!!");
 	}
 
 	
-	public void repartirCartas(Jugador pJugador, int pCuantas)
+	public void repartirCartas(Jugador pJugador, int pCuantas) throws NoHayMasCartasException 
 	{
 		int i=0;
 		do{
@@ -176,7 +175,4 @@ public class Partida
 			}
 		}	
 	}
-
-
 }
-
