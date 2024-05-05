@@ -23,7 +23,7 @@ public class Mazo
 	{
 		String[] colores = {"rojo", "azul", "verde", "amarillo"};
 	    
-		this.lista.clear(); //Limpia el mazo antes de añadir cartas
+		this.lista.clear(); //Limpia el mazo antes de añadir cartas para las Junits
 		
 	    // Se añade cartas numeradas y cartas "Toma Dos" para cada color
 	    for (String color : colores) {
