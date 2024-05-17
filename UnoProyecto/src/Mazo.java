@@ -68,8 +68,15 @@ public class Mazo
 				todoCorrecto=true;
 			}
 		} while(!todoCorrecto);
-		
-		return this.lista.remove(this.lista.size() - 1);
+
+		if (this.contarCartas()!=0)
+		{
+			return this.lista.remove(this.lista.size() - 1);
+		}
+		else
+		{
+			throw new NoHayMasCartasException();
+		}
 	}
 	
 	public void anadirCartaAlMazo(Carta pCarta)
