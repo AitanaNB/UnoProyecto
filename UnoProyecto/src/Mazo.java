@@ -68,11 +68,8 @@ public class Mazo
 				todoCorrecto=true;
 			}
 		} while(!todoCorrecto);
-		if (!this.lista.isEmpty()) {
-	        return this.lista.remove(this.lista.size() - 1);
-	    } else {
-	        throw new NoHayMasCartasException(); // Lanzar excepción si no hay cartas en el mazo
-	    }
+		
+		return this.lista.remove(this.lista.size() - 1);
 	}
 	
 	public void anadirCartaAlMazo(Carta pCarta)
