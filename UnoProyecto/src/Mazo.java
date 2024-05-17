@@ -100,4 +100,9 @@ public class Mazo
 			anadirCartaAlMazo(actual);
 		}
 	}
+
+	public void vaciarMazo()
+	{
+		this.lista=new ArrayList<Carta>();
+	}
 }
