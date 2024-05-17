@@ -1,6 +1,7 @@
 package org.pmoo.proyecto;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
@@ -28,58 +29,102 @@ public class MazoTest {
     }
     
     @Test
-    public void testInicializarMazo() {
-        assertEquals(88, mazo.contarCartas());
+    public void testInicializarMazo() 
+    {
+        try 
+        {
+			assertEquals(88, mazo.contarCartas());
+		} catch (NoHayMasCartasException e) 
+        {
+			fail("Ha saltado una excepcion no debida");
+		}
         // Otros casos de prueba...
     }
 
     @Test
-    public void testContarCartas() {
-        assertEquals(88, mazo.contarCartas());
+    public void testContarCartas() 
+    {
+        try 
+        {
+			assertEquals(88, mazo.contarCartas());
+		} catch (NoHayMasCartasException e) 
+        {
+			fail("Ha saltado una excepcion no debida");
+		}
     }
+    
 
     @Test 
-    //Caso 1: cuando el mazo queda una única carta
+    //Caso 1: cuando el mazo queda una Ãºnica carta
     public void testQuitarCartasDelMazo_Caso1()
     {
-    	while(mazo.contarCartas()>1)
+    	try 
     	{
-    		mazo.quitarCartaDelMazo();
-    	}
-    	assertEquals(1, mazo.contarCartas());
-    	Carta ultimaCarta = mazo.quitarCartaDelMazo();
-    	assertNotNull(ultimaCarta);
+			while(mazo.contarCartas()>1)
+			{
+				mazo.quitarCartaDelMazo();
+			}	
+			assertEquals(1, mazo.contarCartas());
+	    	Carta ultimaCarta = mazo.quitarCartaDelMazo();
+	     	assertNotNull(ultimaCarta);
+		} 
+    	catch (NoHayMasCartasException e) 
+    	{
+			fail("Ha saltado una excepcion no debida");
+		}
     }
     @Test
   //Caso 2: cuando el mazo queda multiples cartas
     public void testQuitarCartasDelMazo_Caso2()
     {
-    	Carta unaCarta = mazo.quitarCartaDelMazo();
-    	assertEquals(87, mazo.contarCartas());
-    	assertNotNull(unaCarta);
+    	try 
+    	{
+	    	Carta unaCarta = mazo.quitarCartaDelMazo();
+	    	assertEquals(87, mazo.contarCartas());
+	    	assertNotNull(unaCarta);
+    	}
+    	catch (NoHayMasCartasException e)
+    	{
+    		fail("Ha saltado una excepcion no debida");
+    	}
     }
+    
     @Test
-  //Caso 3: cuando el mazo se queda sin cartas, deben pasarse todas menos la ultima de pila descartes
+  //Caso 3: cuando el mazo se queda sin cartas, salta la excepcion
     public void testQuitarCartasDelMazo_Caso3()
     {
-    	while(mazo.contarCartas()>0)
+    	try
     	{
-    		Carta unaCarta=mazo.quitarCartaDelMazo();
-    		descarte.anadirCarta(unaCarta);
-    		//Al salir del while, el mazo estara vacio
+	    	while(mazo.contarCartas()>0)
+	    	{
+	    		Carta unaCarta=mazo.quitarCartaDelMazo();
+	    		descarte.anadirCarta(unaCarta);
+	    		//Al salir del while, el mazo estara vacio
+	    	}
+	    	mazo.quitarCartaDelMazo();
+	    	//Cuando intentamos quitar una carta del mazo, se ejecutara el metodo moverCartaDesdePilaDescarte
+	    	//que pasara todas las cartas de pila descarte, menos la ultima, al mazo. Despues de hacer eso
+	    	//se quitara una carta.
+	    	assertEquals(mazo.contarCartas(),86);
+	    	fail("No ha saltado la excepcion");
     	}
-    	mazo.quitarCartaDelMazo();
-    	//Cuando intentamos quitar una carta del mazo, se ejecutara el metodo moverCartaDesdePilaDescarte
-    	//que pasara todas las cartas de pila descarte, menos la ultima, al mazo. Despues de hacer eso
-    	//se quitara una carta.
-    	assertEquals(mazo.contarCartas(),86);
+    	catch (NoHayMasCartasException e)
+    	{
+    	}
     }
     @Test
     public void testAnadirCartasAlMazo()
     {
-    	Carta unaCarta= new CartaNum("Amarillo",4);
-    	mazo.anadirCartaAlMazo(unaCarta);
-    	assertEquals(mazo.contarCartas(),89);
+    	try
+    	{
+	    	Carta unaCarta= new CartaNum("Amarillo",4);
+	    	mazo.anadirCartaAlMazo(unaCarta);
+	    	assertEquals(mazo.contarCartas(),89);
+    	}
+    	catch(NoHayMasCartasException e)
+    	{
+    		fail("Ha saltado una excepcion no debida");
+    	}
     }
     
     @Test
@@ -91,7 +136,14 @@ public class MazoTest {
     	mazo.anadirCartaAlMazo(carta2);
     	mazo.anadirCartaAlMazo(carta3);
     	mazo.mezclarCarta();
-    	assertEquals(mazo.contarCartas(),3);
+    	try
+    	{
+    		assertEquals(mazo.contarCartas(),3);
+    	}
+    	catch (NoHayMasCartasException e)
+    	{
+    		fail("Ha saltado una excepcion no debida");
+    	}
     }
     
     @Test
@@ -101,7 +153,14 @@ public class MazoTest {
     	mazo.vaciarMazo();
     	mazo.anadirCartaAlMazo(carta1);
     	mazo.mezclarCarta();
-    	assertEquals(mazo.contarCartas(),1);
+    	try
+    	{
+    		assertEquals(mazo.contarCartas(),1);
+    	}
+    	catch (NoHayMasCartasException e)
+    	{
+    		fail("Ha saltado una excepcion no debida");
+    	}
     }
     
     @Test
@@ -110,6 +169,13 @@ public class MazoTest {
     {
     	mazo.vaciarMazo();
     	mazo.mezclarCarta();
-    	assertEquals(mazo.contarCartas(),0);
+    	try
+    	{
+    		assertEquals(mazo.contarCartas(),0);
+    		fail("No ha saltado la excepcion esperada");
+    	}
+    	catch (NoHayMasCartasException e)
+    	{
+    	}
     }
 }
