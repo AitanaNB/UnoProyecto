@@ -59,11 +59,19 @@ class JugadorTest {
 		mazo.anadirCartaAlMazo(carta2);
 		mazo.anadirCartaAlMazo(carta3);
 		pDescarte.anadirCarta(carta1);
-		unJugador.robarCarta();
+		try {
+			unJugador.robarCarta();
+		} catch (NoHayMasCartasException e1) {
+			fail("Ha saltado una excepcion no debida");
+		}
 		//Se roban las cartas: carta3 y carta2, ninguna de las dos jugables
 		//Por lo que la baraja del jugador tendra 2 cartas, y el mazo se quedara con 1 carta
-		assertEquals(unJugador.barajalong(),2);
-		assertEquals(mazo.contarCartas(),1);
+		assertEquals(unJugador.longitudBaraja(),2);
+		try {
+			assertEquals(mazo.contarCartas(),1);
+		} catch (NoHayMasCartasException e) {
+			fail("Ha saltado una excepcion no debida");
+		}
 	}
 
 	@Test
@@ -84,11 +92,11 @@ class JugadorTest {
 
 	@Test
 	//CASO 1: Se selecciona una carta valida, y posicion valida. Se elimina la carta de la baraja del jugador
-	//y se añade a la pila descarte
+	//y se aÃ±ade a la pila descarte
 	void testUsarCarta1() {
 		ArrayList<Carta> listaP = new ArrayList<Carta>(); //creacion de lista auxiliar para la prueba
 		listaP.add(carta2);
-		listaP.add(carta6);
+		listaP.add(carta4);
 		pDescarte.anadirCarta(carta2);
 		unJugador.agregarCartaAMano(carta1);
 		unJugador.agregarCartaAMano(carta2);
@@ -96,7 +104,11 @@ class JugadorTest {
 		unJugador.agregarCartaAMano(carta4);
 		unJugador.agregarCartaAMano(carta5);
 		unJugador.agregarCartaAMano(carta6);
-		unJugador.usarCarta(5); //Se juega la carta6 ya que se tiene en cuenta la pos0
+		try {
+			unJugador.usarCarta(1);
+		} catch (NoHayMasCartasException e) {
+			fail("Ha saltado una excepcion no debida");
+		} //Se juega la carta6 ya que se tiene en cuenta la pos0
 		
 		pDescarte.anadirCarta(carta4);
 		assertEquals(listaP,pDescarte.obtenerCartasSinUltima()); //Se compara la lista que tiene las cartas:
@@ -114,11 +126,16 @@ class JugadorTest {
 		unJugador.agregarCartaAMano(carta4);
 		unJugador.agregarCartaAMano(carta5);
 		unJugador.agregarCartaAMano(carta6);
-		unJugador.usarCarta(2); //Se juega la carta6 ya que se tiene en cuenta la pos0
+		try {
+			unJugador.usarCarta(2);
+		} catch (NoHayMasCartasException e) {
+			// TODO Auto-generated catch block
+			fail("Ha saltado una excepcion no debida");
+		} //Se juega la carta6 ya que se tiene en cuenta la pos0
 		//Al no ser una carta valida para jugar, se roba una carta del mazo, y como ninguna de las cartas
 		//del mazo es valida para jugar, se vuelve a robar otra vez, y se termina el turno, por lo tanto,
 		//el jugador ahora deberia tener una baraja de 3+2 cartas.
-		assertEquals(unJugador.barajalong(),5);
+		assertEquals(unJugador.longitudBaraja(),5);
 	}
 	
 	@Test
@@ -129,19 +146,23 @@ class JugadorTest {
 		mazo.anadirCartaAlMazo(carta2);
 		pDescarte.anadirCarta(carta4);
 		unJugador.agregarCartaAMano(carta1);
-		unJugador.usarCarta(0); //Se juega la carta1 ya que se tiene en cuenta la pos0
+		try {
+			unJugador.usarCarta(0);
+		} catch (NoHayMasCartasException e) {
+			fail("Ha saltado una excepcion no debida");
+		} //Se juega la carta1 ya que se tiene en cuenta la pos0
 		//Al no ser una carta valida para jugar, se roba una carta del mazo, y como se roba una carta jugable
 		//la juega, y termina el turno. Por lo que la baraja  del jugador solo tendra 1 carta, y la pila Descarte
 		//tendra una carta mas.
-		assertEquals(unJugador.barajalong(),1);
-		assertEquals(pDescarte.longitud(),2);
+		assertEquals(unJugador.longitudBaraja(),1);
+		assertEquals(pDescarte.longitudPDescarte(),2);
 	}
 
 	@Test
 	//CASO 1: Agregar 1 carta a una baraja vacia
 	void testAgregarCartaAMano1() {
 		unJugador.agregarCartaAMano(carta1);
-		assertEquals(unJugador.barajalong(),1);
+		assertEquals(unJugador.longitudBaraja(),1);
 	}
 	
 	@Test
@@ -149,7 +170,7 @@ class JugadorTest {
 	void testAgregarCartaAMano2() {
 		unJugador.agregarCartaAMano(carta1);
 		unJugador.agregarCartaAMano(carta2);
-		assertEquals(unJugador.barajalong(),2);
+		assertEquals(unJugador.longitudBaraja(),2);
 	}
 
 	@Test
