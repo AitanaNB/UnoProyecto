@@ -15,11 +15,11 @@ public class Partida
 		return miPartida;
 	}
 	
-	public void jugarPartida() throws NumberFormatException, NoEsOpcionException, NoHayMasCartasException
+	public void jugarPartida() throws NoEsOpcionException, NoHayMasCartasException
 	{
 		Teclado miTeclado=Teclado.getTeclado();
 		
-		System.out.println("*********¡¡¡¡¡¡¡BIENVENIDO A LA PARTIDA!!!!!!!*********");
+		System.out.println("*********Â¡Â¡Â¡Â¡Â¡Â¡Â¡BIENVENIDO A LA PARTIDA!!!!!!!*********");
 		
 		//Inicializar mazo y mezclar las cartas		
 		Mazo.getMazo().inicializarMazo();
@@ -48,13 +48,13 @@ public class Partida
         this.jugadorActual=jugador1;
         
         //Mostrar la primera carta
-        Carta primeraC= Mazo.getMazo().quitarCartaDelMazo();
-        PilaDescarte.getPilaDescarte().anadirCarta(primeraC);
-        while (primeraC instanceof CartaEsp)
+        Carta primeraC;
+        do 
         {
-        	primeraC= Mazo.getMazo().quitarCartaDelMazo();
-        	PilaDescarte.getPilaDescarte().anadirCarta(primeraC);
-        }
+        primeraC= Mazo.getMazo().quitarCartaDelMazo();
+        PilaDescarte.getPilaDescarte().anadirCarta(primeraC);
+        } while (primeraC instanceof CartaEsp);
+        
         System.out.println("Se empieza con la carta: "+primeraC.toString());
         
         //Bucle principal del juego
@@ -72,7 +72,7 @@ public class Partida
 
 		    if (opcion.equals("J") || opcion.equals("j")) 
 		    { // Decide jugar
-		        System.out.println("Teclea el valor de la posición de la carta que quieras jugar.");
+		        System.out.println("Teclea el valor de la posiciÃ³n de la carta que quieras jugar.");
 		        System.out.println("");
 		        
 		        String input = miTeclado.leerString("Recuerda darle a enter :3 ");
@@ -90,8 +90,8 @@ public class Partida
 		        	{
 		        		input="1";	
 		        		System.out.println("Ha ocurrido NumberFormatException");
-		        		System.out.println("Esa no posición no vale :/ ");
-		        		System.out.println("Se establece la posición uno por defecto");
+		        		System.out.println("Esa no posiciÃ³n no vale :/ ");
+		        		System.out.println("Se establece la posiciÃ³n uno por defecto");
 		        		System.out.println("");
 		        			
 		        	}
@@ -134,9 +134,9 @@ public class Partida
 		    	turnoJugador(); // Cambia de jugador
 		    }
 		    System.out.println("\n.......................................................................");
-		    System.out.println("\nÚltima carta jugada: "+ PilaDescarte.getPilaDescarte().obtenerUltimaCarta());
+		    System.out.println("\nÃšltima carta jugada: "+ PilaDescarte.getPilaDescarte().obtenerUltimaCarta());
 		}
-		System.out.println("¡¡¡¡¡¡ENHORABUENA "+ jugadorActual.getNombre() + " HAS GANADO!!!!!!!");
+		System.out.println("Â¡Â¡Â¡Â¡Â¡Â¡ENHORABUENA "+ jugadorActual.getNombre() + " HAS GANADO!!!!!!!");
 	}
 
 	
