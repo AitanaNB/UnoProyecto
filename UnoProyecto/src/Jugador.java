@@ -95,8 +95,13 @@ public class Jugador
 	}
 	
 	public boolean haJugado()
-    {
+	{
         return this.haJugado;
-    }
+	}
+
+	public int longitudBaraja() 
+	{
+		return this.baraja.contar();
+	}
 	
 }
