@@ -25,8 +25,8 @@ public class PilaDescarte
 	{
 		return this.lista.get(this.lista.size()-1);
 	}
-
-public ArrayList<Carta> obtenerCartasSinUltima()
+	
+	public ArrayList<Carta> obtenerCartasSinUltima()
 	{
 		int longitud= this.lista.size();
 		ArrayList<Carta> listaSinUlt = new ArrayList<Carta>();
@@ -36,5 +36,15 @@ public ArrayList<Carta> obtenerCartasSinUltima()
 			this.lista.remove(1);
 		}
 		return listaSinUlt;
+	}
+
+	public void vaciar()
+	{
+		this.lista=new ArrayList<Carta>();
+	}
+	
+	public int longitudPDescarte()
+	{
+		return this.lista.size();
 	}
 }
