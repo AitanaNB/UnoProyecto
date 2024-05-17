@@ -32,8 +32,8 @@ public class PilaDescarte
 		ArrayList<Carta> listaSinUlt = new ArrayList<Carta>();
 		for (int i=0; i<longitud-1; i++)
 		{
-			listaSinUlt.add(lista.get(1));
-			this.lista.remove(1);
+			listaSinUlt.add(lista.get(0));
+			this.lista.remove(0);
 		}
 		return listaSinUlt;
 	}
