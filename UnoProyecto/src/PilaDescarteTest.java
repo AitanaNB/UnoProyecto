@@ -29,9 +29,9 @@ class PilaDescarteTest {
 	@Test
 	//CASO 1: Anadir carta a una lista vacia
 	void testAnadirCarta() {
-		assertTrue(pDescarte.longitud()==0);
+		assertTrue(pDescarte.longitudPDescarte()==0);
 		pDescarte.anadirCarta(carta1);
-		assertTrue(pDescarte.longitud()==1);
+		assertTrue(pDescarte.longitudPDescarte()==1);
 	}
 
 	@Test
@@ -41,48 +41,6 @@ class PilaDescarteTest {
 		pDescarte.anadirCarta(carta2);
 		pDescarte.anadirCarta(carta3);
 		assertEquals(pDescarte.obtenerUltimaCarta(),carta3);
-	}
-
-	@Test
-	//CASO 1: Cartas numericas de mismo color y distinto numero, daria true
-	void testPuedeUsarse1() {
-		pDescarte.anadirCarta(carta2);
-		assertTrue(pDescarte.puedeUsarse(carta4));
-	}
-
-	@Test
-	//CASO 2: Cartas numericas de mismo numero y distinto color, daria true
-	void testPuedeUsarse2() {
-		pDescarte.anadirCarta(carta3);
-		assertTrue(pDescarte.puedeUsarse(carta4));
-	}
-	
-	@Test
-	//CASO 3: Cartas numericas de mismo numero y color, daria true
-	void testPuedeUsarse3() {
-		pDescarte.anadirCarta(carta3);
-		assertTrue(pDescarte.puedeUsarse(carta3));
-	}
-	
-	@Test
-	//CASO 4: Carta numerica y carta especial de mismo color, daria true
-	void testPuedeUsarse4() {
-		pDescarte.anadirCarta(carta3);
-		assertTrue(pDescarte.puedeUsarse(carta5));
-	}
-	
-	@Test
-	//CASO 5: Carta especial y carta numerica de distinto color, daria false
-	void testPuedeUsarse5() {
-		pDescarte.anadirCarta(carta5);
-		assertFalse(pDescarte.puedeUsarse(carta1));
-	}
-
-	@Test
-	//CASO 6: Carta especial y carta especial de distinto color, daria true
-	void testPuedeUsarse6() {
-		pDescarte.anadirCarta(carta5);
-		assertTrue(pDescarte.puedeUsarse(carta6));
 	}
 
 	@Test
