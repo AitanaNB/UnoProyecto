@@ -23,10 +23,10 @@ class PartidaTest
 	//CASO1: Al momento de elegir la opcion, se escribe un caracter distinto a J o R, entonces salta 
 	//NoEsOpcionException
 	//Codigo adaptado para el caso de prueba del metodo JugarPartida() de la clase Partida 
-	void testJugarPartida1() throws NoEsOpcionException {
-		Partida partida = Partida.getPartida();
+	void testJugarPartida1()  {	
 		try
 		{
+			Partida partida = Partida.getPartida();
 			partida.jugarPartida();
 			fail("No se ha detectado un NoEsOpcionException");
 		}
@@ -44,16 +44,27 @@ class PartidaTest
 	@Test
 	//CASO 1: Se reparten cartas a los dos jugadores. Comprobar que sus barajas tienen el numero correcto
 	//de cartas y que el mazo tiene menos cartas, 88-(el numero de cartas repartidas).
-	void testRepartirCartas() throws NoEsOpcionException 
+	void testRepartirCartas()  
 	{
-		Partida partida = Partida.getPartida();
-		mazo.inicializarMazo();
-		mazo.mezclarCarta();
-		partida.repartirCartas(j1, 5);
-		partida.repartirCartas(j2, 7);
-		assertEquals(j1.barajalong(),5); //El jugador 1 deberia tener 5 cartas tras haberselas repartido
-		assertEquals(j2.barajalong(),7); //El jugador 2 deberia tener 7 cartas tras haberselas repartido
-		assertEquals(mazo.contarCartas(),76); //En el mazo deberian quedar 76 cartas ya que: 88 cartas que hay
-		//tras inicializar el mazo -(5+7) cartas que se han repartido.
+		try
+		{
+			Partida partida = Partida.getPartida();
+			mazo.inicializarMazo();
+			mazo.mezclarCarta();
+			partida.repartirCartas(j1, 5);
+			partida.repartirCartas(j2, 7);
+			assertEquals(j1.longitudBaraja(),5); //El jugador 1 deberia tener 5 cartas tras haberselas repartido
+			assertEquals(j2.longitudBaraja(),7); //El jugador 2 deberia tener 7 cartas tras haberselas repartido
+			assertEquals(mazo.contarCartas(),76); //En el mazo deberian quedar 76 cartas ya que: 88 cartas que hay
+			//tras inicializar el mazo -(5+7) cartas que se han repartido.
+		}
+		catch (NoHayMasCartasException e)
+		{
+		 fail("Ha saltado una excepcion");
+		}
+		catch (NoEsOpcionException e)
+		{
+			fail("Ha saltado una excepcion");
+		}
 	}
 }
